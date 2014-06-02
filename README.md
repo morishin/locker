@@ -14,12 +14,15 @@ locker lock <filename>
 Input password:
 '<filename>' created.
 ```
+![1](https://cloud.githubusercontent.com/assets/1413408/3149866/6e4ea306-ea6f-11e3-9d5c-1ee9935601b8.gif)
 - Open a encoded file.
 ```Shell
 locker open <filename>
 Input password:
 (Display file content)
 ```
+![2](https://cloud.githubusercontent.com/assets/1413408/3149868/711a4c66-ea6f-11e3-97db-b825bd69146b.gif)
+
 - You can edit content of a encoded file.
 ```Shell
 locker edit <filename>
