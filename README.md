@@ -2,31 +2,39 @@
 *locker* is a shell script to protect a text file by AES encryption.
 
 ##How to use
-Change the permissions of shell script to executable.
+- Change the permissions of shell script to executable.
 ```Shell
-chmod +x locker.sh
+chmod +x <script file path>
+alias locker='<script file path>'
 ```
-Create a new file and encrypt.
+- Create a new file and encode.
 ```Shell
-locker.sh lock <filename>
+locker lock <filename>
 (Edit file...)
 Input password:
 '<filename>' created.
 ```
-Open a encrypted file.
+- Open a encoded file.
 ```Shell
-locker.sh open <filename>
+locker open <filename>
 Input password:
 (Display file content)
 ```
-You can change password after created.
+- You can edit content of a encoded file.
 ```Shell
-locker.sh chpass <filename>
+locker edit <filename>
+Input password:
+(Edit file...)
+'<filename> edited.'
+```
+- And you can change password.
+```Shell
+locker chpass <filename>
 Input password:
 Input NEW password:
 Password updated.
 ```
-You can display help information.
+- You can display help information.
 ```Shell
-locker.sh help
+locker help
 ```
