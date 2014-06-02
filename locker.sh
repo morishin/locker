@@ -9,6 +9,7 @@ function usage() {
   echo "    help               Display help information"
   echo "    open   <filename>  Decode a file"
   echo "    lock   <filename>  Encode a file by password"
+  echo "    edit   <filename>  Edit content of a encoded file"
   echo "    chpass <filename>  Change password an encoded file"
 }
 
@@ -38,6 +39,10 @@ if [ $# -eq 1 ]; then
       ;;
     lock)
       echo "usage: $cmd lock <filename>"
+      exit 1
+      ;;
+    edit)
+      echo "usage: $cmd edit <filename>"
       exit 1
       ;;
     chpass)
@@ -99,6 +104,43 @@ _EOT_
         echo "'$filename' created."
       fi
       ;;
+    edit)
+      check_file_exists $filename
+      printf "Input password: "
+      stty -echo
+      read password
+      stty echo
+      echo
+      decoded=`openssl enc -aes-256-cbc -d -base64 -in $filename -pass pass:$password 2> /dev/null`
+      if [ $? -ne 0 ]; then
+        echo "Incorrect password"
+        exit 1
+      else
+        TMP_FILE_NAME=".locker_tmp_file"
+        printf "" > $TMP_FILE_NAME
+        for line in $decoded;do
+          echo $line >> $TMP_FILE_NAME
+        done
+        if [ "$EDITOR" ]; then
+          $EDITOR $TMP_FILE_NAME
+        else
+          vim $TMP_FILE_NAME
+        fi
+        encoded=`openssl enc -aes-256-cbc -e -base64 -in $TMP_FILE_NAME -pass pass:$password`
+        rm $TMP_FILE_NAME
+        if [ $? -ne 0 ]; then
+          echo "Encode error"
+          exit 1
+        else
+          printf "" > $filename
+          for line in $encoded;do
+            echo $line >> $filename
+          done
+          echo "'$filename' edited."
+          exit 0
+        fi
+      fi
+      ;;
     chpass)
       check_file_exists $filename
       printf "Input password: "
@@ -107,7 +149,7 @@ _EOT_
       stty echo
       echo
       TMP_FILE_NAME=".locker_tmp_file"
-      openssl enc -aes-256-cbc -d -base64 -in $filename -pass pass:$password > TMP_FILE_NAME 2> /dev/null
+      openssl enc -aes-256-cbc -d -base64 -in $filename -pass pass:$password > $TMP_FILE_NAME 2> /dev/null
       if [ $? -ne 0 ]; then
         echo "Incorrect password"
         exit 1
@@ -117,8 +159,8 @@ _EOT_
         read password
         stty echo
         echo
-        encoded=`openssl enc -aes-256-cbc -e -base64 -in TMP_FILE_NAME -pass pass:$password`
-        rm TMP_FILE_NAME
+        encoded=`openssl enc -aes-256-cbc -e -base64 -in $TMP_FILE_NAME -pass pass:$password`
+        rm $TMP_FILE_NAME
         if [ $? -ne 0 ]; then
           echo "Encode error"
           exit 1
