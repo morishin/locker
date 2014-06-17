@@ -111,16 +111,12 @@ _EOT_
       read password
       stty echo
       echo
-      decoded=`openssl enc -aes-256-cbc -d -base64 -in $filename -pass pass:$password 2> /dev/null`
+      TMP_FILE_NAME=".locker_tmp_file"
+      openssl enc -aes-256-cbc -d -base64 -in $filename -pass pass:$password > $TMP_FILE_NAME 2> /dev/null
       if [ $? -ne 0 ]; then
         echo "Incorrect password"
         exit 1
       else
-        TMP_FILE_NAME=".locker_tmp_file"
-        printf "" > $TMP_FILE_NAME
-        for line in $decoded;do
-          echo $line >> $TMP_FILE_NAME
-        done
         if [ "$EDITOR" ]; then
           $EDITOR $TMP_FILE_NAME
         else
