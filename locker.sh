@@ -20,6 +20,19 @@ function check_file_exists() {
   fi
 }
 
+function confirm_password() {
+    pass1=$1;
+    printf "Input password again: "
+    stty -echo
+    read pass2
+    stty echo
+    echo
+    if [ $pass1 != $pass2 ]; then
+        echo "Inputted two passwords are wrong"
+        exit 1
+    fi
+}
+
 which openssl > /dev/null
 if [ $? -ne 0 ]; then
     echo "$cmd requires 'openssl' command installed"
@@ -92,6 +105,7 @@ _EOT_
       read password
       stty echo
       echo
+      confirm_password $password
       encoded=`openssl enc -aes-256-cbc -e -base64 -in $filename -pass pass:$password`
       if [ $? -ne 0 ]; then
         echo "Encode error"
@@ -155,6 +169,7 @@ _EOT_
         read password
         stty echo
         echo
+	confirm_password $password
         encoded=`openssl enc -aes-256-cbc -e -base64 -in $TMP_FILE_NAME -pass pass:$password`
         rm $TMP_FILE_NAME
         if [ $? -ne 0 ]; then
