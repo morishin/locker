@@ -4,7 +4,7 @@
 ##Install
 You can install *locker* via [Homebrew](http://brew.sh/).
 ```Shell
-brew tap morishin/homebrew-morishin
+brew tap morishin/morishin
 brew install locker
 ```
 ##Usage
