@@ -1,13 +1,14 @@
 #locker
 *locker* is a shell script to protect a text file by AES encryption.
 
-##How to use
-- Change the permissions of shell script to executable.
+##Install
+You can install *locker* via [Homebrew](http://brew.sh/).
 ```Shell
-chmod +x <script file path>
-alias locker='<script file path>'
+brew tap morishin/homebrew-morishin
+brew install locker
 ```
-- Create a new file and encode.
+##Usage
+- Create a new text file and encode.
 ```Shell
 locker lock <filename>
 (Edit file...)
@@ -34,7 +35,7 @@ Input password:
 Input NEW password:
 Password updated.
 ```
-- You can display help information.
+- More help information.
 ```Shell
 locker help
 ```

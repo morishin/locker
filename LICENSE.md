@@ -1,3 +1,5 @@
+This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit.
+
 The MIT License (MIT)
 
 Copyright (c) 2014 Shintaro Morikawa
