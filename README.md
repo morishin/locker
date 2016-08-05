@@ -13,16 +13,17 @@ brew install locker
 locker lock <filename>
 (Edit file...)
 Input password:
+Input password again:
 '<filename>' created.
 ```
-![1](https://cloud.githubusercontent.com/assets/1413408/3149866/6e4ea306-ea6f-11e3-9d5c-1ee9935601b8.gif)
+<img src="https://cloud.githubusercontent.com/assets/1413408/17423459/c6c48200-5af5-11e6-826e-a5ce86a87030.png" width="640"/>
 - Open a encoded file.
 ```Shell
 locker open <filename>
 Input password:
 (Display file content)
 ```
-![2](https://cloud.githubusercontent.com/assets/1413408/3149868/711a4c66-ea6f-11e3-97db-b825bd69146b.gif)
+<img src="https://cloud.githubusercontent.com/assets/1413408/17423475/d2607d4e-5af5-11e6-979f-b60ae10308d6.gif" width="640"/>
 
 - You can edit content of a encoded file.
 ```Shell
