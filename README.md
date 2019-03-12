@@ -3,10 +3,12 @@
 
 ## Install
 You can install *locker* via [Homebrew](http://brew.sh/).
-```Shell
+
+```shell
 brew tap morishin/morishin
 brew install locker
 ```
+
 ## Usage
 - Create a new text file and encode.
 
@@ -18,7 +20,7 @@ brew install locker
   '<filename>' created.
   ```
 
-<img src="https://cloud.githubusercontent.com/assets/1413408/17423459/c6c48200-5af5-11e6-826e-a5ce86a87030.png" width="640"/>
+  <img src="https://cloud.githubusercontent.com/assets/1413408/17423459/c6c48200-5af5-11e6-826e-a5ce86a87030.png" width="640"/>
 
 - Open a encoded file.
 
